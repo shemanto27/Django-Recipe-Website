@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 EXTERNAL_APPS = [
     'accounts',
+    'all_recipes',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

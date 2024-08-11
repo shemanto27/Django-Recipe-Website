@@ -1,19 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
-
-# Create your views here.
 def registration(request):
     if request.method == 'POST':
         data = request.POST
-        user_name = data.get('userName')
-        user_email = data.get('userEmail/')
-        phone_number = data.get('phone')
-        gender = data.get('userGender')
-        
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
 
-    context={'page_title' : 'Registration Page',}
+        user = User.objects.filter(username=username)
+        if user.exists():
+            messages.info(request, 'username already exists!')
+            return redirect('/registration')
+
+        user = User.objects.create(  
+            username=username,
+            email=email,
+        )
+        user.set_password(password)
+        user.save()
+        messages.info(request, 'User registered successfully!')
+        return redirect('/login') 
+    context = {'page_title': 'Registration Page'}
     return render(request, "registration.html", context)
 
-def login(request):
-    context={'page_title':'Registration Page',}
+def login_page(request):
+    if request.method == 'POST':
+        data = request.POST
+        username = data.get('username')
+        password = data.get('password')
+        
+        if not User.objects.filter(username = username).exists():
+            messages.error(request,"User Does not Exists!")
+            return redirect('/login')
+        else:
+            user = authenticate(username = username, password = password)
+            if user is None:
+                message.error(request, "Password Incorrect")
+                return redirect('/login')
+            else:
+                login(request, user)
+                return redirect('/all_recipes')
+    context = {'page_title': 'Login Page'}  # Corrected context title
     return render(request, "login.html", context)
