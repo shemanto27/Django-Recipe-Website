@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block start %}
-<h1>This is Registration Page</h1>
+<div class="container mb-3">
+<form action="registration/" method="post">
+    {% csrf_token %}
+    <input class="form-control form-control-lg" type="text" name="userName" placeholder="User Name" required>
+    <input class="form-control form-control-lg" type="email" name="userEmail" placeholder="Email" required>
+    <input class="form-control form-control-lg" type="tel" name="phone" placeholder="Phone Number" required>
+    <fieldset>
+        <input type="radio" name="userGender" value="Male" required>
+        <label for="Male">Male</label>
+        <input type="radio" name="userGender" value="Female" required>
+        <label for="Femail">Female</label>
+    </fieldset>
+    <input class="form-control form-control-lg" type="password" name="password" placeholder="password" required>
+    <input class="form-control form-control-lg" type="password" name="confirm_password" placeholder="Confirm Password" required>
+    <button class="btn btn-primary" type="submit">Complete Registration</button>
+    <p>Already Have a Account? <a href="/login">Login Instead</a></p>
+</form>
+</div>
 {% endblock %}

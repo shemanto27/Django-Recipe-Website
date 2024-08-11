@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block start %}
+<div class="container mb-3">
 <h1>This is Login page</h1>
+
+<form action="login/" method="post">
+    {% csrf_token %}
+    <input class="form-control form-control-lg" type="email" name="userEmail" placeholder="Email" required>
+    <input class="form-control form-control-lg" type="password" name="password" placeholder="password" required>
+    <button class="btn btn-primary" type="submit" value="login">LogIn</button>
+    <p>Don't have Account? <a href="/registration">Registers Now!</a></p>
+</form>
+</div>
+
 {% endblock %}
