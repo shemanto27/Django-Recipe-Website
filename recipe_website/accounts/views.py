@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 def registration(request):
     if request.method == 'POST':
@@ -38,10 +38,14 @@ def login_page(request):
         else:
             user = authenticate(username = username, password = password)
             if user is None:
-                message.error(request, "Password Incorrect")
+                messages.error(request, "Password Incorrect")
                 return redirect('/login')
             else:
                 login(request, user)
                 return redirect('/all_recipes')
-    context = {'page_title': 'Login Page'}  # Corrected context title
+    context = {'page_title': 'Login Page'}  
     return render(request, "login.html", context)
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login')
