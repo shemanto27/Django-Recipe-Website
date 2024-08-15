@@ -1,0 +1,9 @@
+body{
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightblue;
+    font-family: verdana;
+}

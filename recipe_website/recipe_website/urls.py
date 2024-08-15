@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from accounts.views import *
 from all_recipes.views import *
+from create_recipe.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('login/', login_page, name='login'),
     path('all_recipes/', recipe_page, name='all_recipes'),
     path('logout/', logout_page, name='logout'),
+    path('create-recipe/', create_recipe_page, name='create recipe')
 ]
